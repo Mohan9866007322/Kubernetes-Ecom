@@ -7,3 +7,5 @@ spec:
   containers:
     - name: ecom-debug
       image: mohan9866007322/ecom-debug:v1
+  imagePullSecrets:
+    - name: regcred
