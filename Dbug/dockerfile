@@ -1,5 +1,13 @@
 FROM almalinux:9
-RUN yum install -y net-tools iproute iputils procps-ng telnet -y
-RUN useradd  ecom
-USER ecom  
+
+# Install basic networking and debugging tools
+RUN yum install -y net-tools iproute iputils procps-ng telnet
+
+# Create a non-root user with home directory
+RUN useradd -m ecom
+
+# Switch to non-root user
+USER ecom
+
+# Keep the container running
 CMD ["sleep", "infinity"]
