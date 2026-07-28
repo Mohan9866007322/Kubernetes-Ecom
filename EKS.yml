@@ -3,14 +3,11 @@ kind: ClusterConfig
 
 metadata:
   name: ecom-1
-  region: us-west-2   # EKS supported region
+  region: us-west-2
 
 managedNodeGroups:
   - name: managed-ng-public
+    instanceType: m5.large
     desiredCapacity: 2
     spot: true
-    instancesDistribution:
-      instanceTypes: ["m5.large", "c5.large", "c3.large"]
-      onDemandBaseCapacity: 0
-      onDemandPercentageAboveBaseCapacity: 0
-      spotAllocationStrategy: capacity-optimized
+
