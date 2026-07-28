@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ecom-mongoDB
+  name: ecom-mongodb
   namespace: ecom
   labels: 
     component: mongodb
