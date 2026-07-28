@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: pod
+metadaata:
+  name: ecom-debug
+  namespace: ecom
+spec:
+  containers:
+    - name: ecom-debug
+      image: mohan9866007322/ecom-debug:v1
