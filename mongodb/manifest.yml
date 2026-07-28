@@ -6,21 +6,41 @@ metadata:
   labels: 
     component: mongodb
     project: ecom
-    tire: Database
+    tire: database
 spec:
   replicas: 1
   selector:
     matchLabels:
       component: mongodb
       project: ecom
-      tire: Database
+      tire: database
   template:
     metadata:            
       labels:
         component: mongodb
         project: ecom
-        tire: Database
+        tire: database
     spec:               
       containers:             
         - name: mongodb
           image: mohan9866007322/mongodb:v1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  namespace: ecom
+  labels:
+    component: mongodb
+    project: ecom
+    tier: database
+spec:
+  selector:
+    component: mongodb
+    project: ecom
+    tier: database
+  ports:
+  - protocol: TCP
+    port: 27017 # service port
+    targetPort: 27017 # container port
