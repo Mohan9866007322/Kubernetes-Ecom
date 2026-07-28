@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongoDB
-  namespace: Ecom
+  name: ecom-mongoDB
+  namespace: ecom
   labels: 
     component: mongodb
-    project: Ecom
+    project: ecom
     tire: Database
 spec:
   replicas: 1
   selector:
     matchLabels:
       component: mongodb
-      project: Ecom
+      project: ecom
       tire: Database
   template:
     metadata:            
       labels:
         component: mongodb
-        project: Ecom
+        project: ecom
         tire: Database
     spec:               
       containers:             
