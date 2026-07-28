@@ -1,4 +1,4 @@
-apiVersion: v1/DB
+apiVersion: v1/apps
 kind: Deployment
 metadata:
   name: Ecom-mongoDB
