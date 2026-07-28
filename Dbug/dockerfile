@@ -1,0 +1,5 @@
+FROM almalinux:9
+RUN yum install -y net-tools iproute iputils procps-ng telnet -y
+RUN useradd  ecom
+USER ecom  
+CMD ["sleep", "infinity"]
