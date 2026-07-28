@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ecom-catalogue
+  namespace: ecom
+  labels: 
+    component: catalogue
+    project: ecom
+    tier: app
+  data:
+    MONGO: true
+    MONGO_URL: "mongodb://mongodb:27017/catalogue"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecom-catalogue
+  namespace: ecom
+  labels: 
+    component: catalogue
+    project: ecom
+    tier: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: catalogue
+      project: ecom
+      tier: app
+  template:
+    metadata:            
+      labels:
+        component: catalogue
+        project: ecom
+        tier: app
+    spec:               
+      containers:             
+        - name: ecom-catalogue
+          image: mohan9866007322/catalogue:v1
+          envFrom:
+            - configMapRef:
+                name: ecom-catalogue
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecom-catalogue
+  namespace: ecom
+  labels:
+    component: catalogue
+    project: ecom
+    tier: app
+spec:
+  selector:
+    component: catalogue
+    project: ecom
+    tier: app
+  ports:
+  - protocol: TCP
+    port: 8080 
+    targetPort: 8080 
