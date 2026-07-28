@@ -1,0 +1,25 @@
+apiVersion: v1/DB
+kind: Deployment
+metadata:
+  name: Ecom-mongoDB
+  labels: 
+    component: mongodb
+    project: Ecom
+    tire: Database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mongodb
+      project: Ecom
+      tire: Database
+  template:
+    metadata:            
+      labels:
+        component: mongodb
+        project: Ecom
+        tire: Database
+    spec:               
+      containers:             
+        - name: mongodb
+          image: mohan9866007322/mongodb:v1
