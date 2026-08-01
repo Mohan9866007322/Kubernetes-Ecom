@@ -1,0 +1,62 @@
+ apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ecom-user
+  namespace: ecom
+  labels: 
+    component: user
+    project: ecom
+    tier: app
+data:
+  MONGO_URL: "mongodb://mongodb:27017/user"
+  REDIS_URL: "redis://redis:6379"
+  MONGO: "true"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecom-user
+  namespace: ecom
+  labels: 
+    component: user
+    project: ecom
+    tier: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: user
+      project: ecom
+      tier: app
+  template:
+    metadata:            
+      labels:
+        component: user
+        project: ecom
+        tier: app
+    spec:               
+      containers:             
+        - name: ecom-user
+          image: mohan9866007322/user:v1
+          envFrom:
+            - configMapRef:
+                name: ecom-user
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecom-user
+  namespace: ecom
+  labels:
+    component: user
+    project: ecom
+    tier: app
+spec:
+  selector:
+    component: user
+    project: ecom
+    tier: app
+  ports:
+  - protocol: TCP
+    port: 8080 
+    targetPort: 8080
