@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-secret
+  namespace: ecom
+  labels:
+    component: mysql
+    project: ecom
+    tier: database
+type: Opaque
+data:
+  MYSQL_ROOT_PASSWORD: "sdgsxcadcdsffrqwsd" #change this to a strong password
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecom-mysql
+  namespace: ecom
+  labels:
+    component: mysql
+    project: ecom
+    tier: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mysql
+      project: ecom
+      tier: database
+  template:
+    metadata:
+      labels:
+        component: mysql
+        project: ecom
+        tier: database
+    spec:
+      containers:
+        - name: mysql
+          image: mohan9866007322/mysql:v1
+          ports:
+            - containerPort: 3306
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: ecom
+  labels:
+    component: mysql
+    project: ecom
+    tier: database
+spec:
+  selector:
+    component: mysql
+    project: ecom
+    tier: database
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306

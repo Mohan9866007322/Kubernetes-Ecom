@@ -1,59 +1,64 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ecom-user
+  name: ecom-shipping
   namespace: ecom
   labels: 
-    component: user
+    component: shipping
     project: ecom
     tier: app
 data:
-  MONGO_URL: "mongodb://mongodb:27017/user"
-  REDIS_URL: "redis://redis:6379"
-  MONGO: "true"
+  # WARNING: Verify these keys against your application's source code!
+  # If it connects to the database:
+  DB_HOST: "mysql"
+  # If it connects to the cart service we created earlier:
+  CART_ENDPOINT: "ecom-cart:8080" 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ecom-user
+  name: ecom-shipping
   namespace: ecom
   labels: 
-    component: user
+    component: shipping
     project: ecom
     tier: app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: user
+      component: shipping
       project: ecom
       tier: app
   template:
     metadata:            
       labels:
-        component: user
+        component: shipping
         project: ecom
         tier: app
     spec:               
       containers:             
-        - name: ecom-user
-          image: mohan9866007322/user:v1
+        - name: ecom-shipping
+          image: mohan9866007322/shipping:v1
+          # BEST PRACTICE: Explicitly declare the port
+          ports:
+            - containerPort: 8080
           envFrom:
             - configMapRef:
-                name: ecom-user
+                name: ecom-shipping
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: ecom-user
+  name: ecom-shipping
   namespace: ecom
   labels:
-    component: user
+    component: shipping
     project: ecom
     tier: app
 spec:
   selector:
-    component: user
+    component: shipping
     project: ecom
     tier: app
   ports:
