@@ -24,8 +24,8 @@ metadata:
     tier: app
 type: Opaque
 data:
-  AMQP_USER: "cm9ib3Nob3A="  #encoded value of 'ecom'
-  AMQP_PASS: "cm9ib3Nob3AxMjM=" #change with your encoded value of 'ecompass'
+  AMQP_USER: "cmFiYml0bXF1"  #encoded value of 'ecom'
+  AMQP_PASS: "cmFiYml0bXFwcGFzcw==" #change with your encoded value of 'ecompass'
 ---
 apiVersion: apps/v1
 kind: Deployment
