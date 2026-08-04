@@ -18,6 +18,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: ecom-payment
+  namespace: ecom
   labels:
     component: payment
     project: ecom
