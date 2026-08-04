@@ -21,7 +21,7 @@ spec:
         project: ecom
         tier: database # Fixed typo
     spec:               
-      containers:             
+      containers:            
         - name: mongodb
           image: mohan9866007322/mongodb:v1
           # BEST PRACTICE: Explicitly declare the port
@@ -43,6 +43,6 @@ spec:
     project: ecom
     tier: database
   ports:
-  - protocol: TCP
-    port: 27017 
-    targetPort: 27017
+    - protocol: TCP
+      port: 27017 
+      targetPort: 27017
